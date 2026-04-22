@@ -4,729 +4,300 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMPACT MATCH — 社企配對平台</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 30px;
-        }
-        
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        .search-card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-            font-size: 1rem;
-        }
-        
-        .form-group select,
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        
-        .form-group select:focus,
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
-        }
-        
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        
-        @media (max-width: 600px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .search-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .search-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-        }
-        
-        .search-btn:active {
-            transform: translateY(0);
-        }
-        
-        .results-section {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-        
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        
-        .results-header h2 {
-            color: #333;
-            font-size: 1.3rem;
-        }
-        
-        .results-count {
-            background: #667eea;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-        
-        .result-card {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-left: 4px solid #667eea;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .result-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        
-        .result-card:last-child {
-            margin-bottom: 0;
-        }
-        
-        .result-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 8px;
-        }
-        
-        .result-name span {
-            font-weight: 400;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        .result-mission {
-            color: #555;
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-        
-        .result-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-        
-        .tag {
-            background: #e8f4f8;
-            color: #1976d2;
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.85rem;
-        }
-        
-        .tag.esg {
-            background: #e8f5e9;
-            color: #388e3c;
-        }
-        
-        .result-esg {
-            background: white;
-            border-radius: 8px;
-            padding: 12px;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .result-esg-title {
-            font-weight: 600;
-            color: #388e3c;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-        }
-        
-        .result-esg ul {
-            margin: 0;
-            padding-left: 18px;
-        }
-        
-        .result-esg li {
-            color: #555;
-            margin-bottom: 4px;
-            font-size: 0.9rem;
-        }
-        
-        .no-results {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-        }
-        
-        .no-results-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
-        
-        .match-score {
-            display: inline-block;
-            background: #4caf50;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            margin-left: 10px;
-        }
-        
-        .footer {
-            text-align: center;
-            color: white;
-            margin-top: 30px;
-            opacity: 0.8;
-            font-size: 0.9rem;
-        }
-        
-        .footer a {
-            color: white;
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        .loading {
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .loading::after {
-            content: '';
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #667eea;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🎯 IMPACT MATCH</h1>
-            <p>企業—社企智能配對平台 | Corporate-Social Enterprise Matching</p>
-        </div>
-        
-        <div class="search-card">
-            <div class="form-group">
-                <label for="category">需求類別</label>
-                <select id="category">
-                    <option value="">-- 請選擇 --</option>
-                    <option value="餐飲">🍽️ 餐飲服務</option>
-                    <option value="禮品">🎁 節慶禮品</option>
-                    <option value="活動">👥 員工活動 / 團隊建立</option>
-                    <option value="環保">🌱 環保 / 可持續發展</option>
-                    <option value="殘疾就業">♿ 殘疾人士就業支援</option>
-                    <option value="長者">👴 長者服務</option>
-                    <option value="青年">🎓 青年培訓</option>
-                    <option value="藝術">🎨 藝術 / 文化</option>
-                    <option value="心理健康">🧠 心理健康</option>
-                    <option value="其他">📦 其他</option>
-                </select>
+    <!-- 首頁 Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🎯 香港首個企業—社企智能配對平台</div>
+            <h1 class="hero-title">
+                讓企業採購<br>
+                <span class="highlight">創造社會影響力</span>
+            </h1>
+            <p class="hero-subtitle">
+                IMPACT MATCH 連結企業 ESG/CSR 需求與香港 50+ 社會企業，<br>
+                為您的員工活動、節慶禮品、培訓工作坊找到最合適的社企伙伴。
+            </p>
+            <div class="hero-cta">
+                <a href="search.html" class="btn btn-primary btn-large">
+                    🔍 立即配對
+                </a>
+                <a href="#how-it-works" class="btn btn-secondary btn-large">
+                    了解運作
+                </a>
             </div>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="budget">預算範圍（港幣）</label>
-                    <select id="budget">
-                        <option value="">-- 不限 --</option>
-                        <option value="5000">$5,000 以下</option>
-                        <option value="10000">$5,000 - $10,000</option>
-                        <option value="50000">$10,000 - $50,000</option>
-                        <option value="100000">$50,000 - $100,000</option>
-                        <option value="100001">$100,000 以上</option>
-                    </select>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">社會企業</div>
                 </div>
-                <div class="form-group">
-                    <label for="event">活動類型</label>
-                    <select id="event">
-                        <option value="">-- 不限 --</option>
-                        <option value="節慶">節慶活動（中秋、新年等）</option>
-                        <option value="團隊">團隊建立</option>
-                        <option value="家庭">家庭日</option>
-                        <option value="志願">員工志願服務</option>
-                        <option value="培訓">員工培訓</option>
-                        <option value="採購">日常採購</option>
-                    </select>
+                <div class="stat">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">服務類別</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">社會價值標籤</div>
                 </div>
             </div>
-            
-            <div class="form-group">
-                <label for="details">詳細需求說明</label>
-                <textarea id="details" placeholder="請描述您的具體需求，例如：&#10;- 活動人數：100 人&#10;- 活動日期：2026年5月&#10;- 希望達成的社會影響：支援弱勢社群就業"></textarea>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-card card-1">
+                <div class="card-icon">🍽️</div>
+                <div class="card-text">餐飲服務</div>
             </div>
-            
-            <button class="search-btn" onclick="search()">
-                🔍 搜尋配對
-            </button>
-        </div>
-        
-        <div id="results" class="results-section hidden">
-            <div class="results-header">
-                <h2>配對結果</h2>
-                <span id="results-count" class="results-count">0 間社企</span>
+            <div class="floating-card card-2">
+                <div class="card-icon">🎁</div>
+                <div class="card-text">節慶禮品</div>
             </div>
-            <div id="results-list"></div>
+            <div class="floating-card card-3">
+                <div class="card-icon">👥</div>
+                <div class="card-text">員工活動</div>
+            </div>
+            <div class="floating-card card-4">
+                <div class="card-icon">🌱</div>
+                <div class="card-text">環保方案</div>
+            </div>
         </div>
-        
-        <div class="footer">
-            <p>IMPACT MATCH MVP | 資料來源：<a href="https://sedirectory.org.hk" target="_blank">社企指南</a></p>
+    </section>
+
+    <!-- 運作方式 -->
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <h2 class="section-title">運作方式</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>填寫需求</h3>
+                    <p>選擇需求類別（餐飲、禮品、活動等），補充活動詳情</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>智能配對</h3>
+                    <p>系統根據類別、關鍵詞、社會價值標籤自動配對</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>查看結果</h3>
+                    <p>瀏覽配對結果，查看社企詳情及 ESG/CSR 合作方案</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>聯繫社企</h3>
+                    <p>直接聯繫心儀社企，開展合作</p>
+                </div>
+            </div>
         </div>
-    </div>
-    
-    <script>
-        // 社企資料庫
-        const socialEnterprises = [
-            {
-                id: 1,
-                name: "側聞聯繫有限公司",
-                nameEn: "SideBySide",
-                year: 2014,
-                mission: "透過創意產業培訓及聘用自閉症及殘疾青年",
-                target: "自閉症及殘疾青年（14-30歲）",
-                categories: ["殘疾就業", "藝術", "青年"],
-                products: ["創意工作坊", "企業培訓活動策劃", "藝術商品零售"],
-                esg: ["企業團隊建立工作坊", "殘疾藝術家作品收藏與饋贈", "員工志願服務體驗"],
-                keywords: ["自閉症", "殘疾", "創意", "藝術", "工作坊", "設計", "手工藝"]
-            },
-            {
-                id: 2,
-                name: "香港復康力量",
-                nameEn: "Hong Kong Rehabilitation Power",
-                year: 1995,
-                mission: "推動傷健共融，幫助殘疾人士增加就業機會",
-                target: "肢體傷殘、視障、聽障、長期病患者、精神病康復者",
-                categories: ["殘疾就業", "餐飲", "培訓"],
-                products: ["活力店（醫院連鎖店）", "就業培訓及轉介服務", "無障礙旅遊顧問"],
-                esg: ["企業無障礙工作環境顧問", "殘疾就業計劃合作", "傷健共融培訓工作坊"],
-                keywords: ["殘疾", "復康", "就業", "培訓", "無障礙", "醫院"]
-            },
-            {
-                id: 3,
-                name: "保良局 ONE 社企",
-                nameEn: "Po Leung Kuk ONE Social Enterprise",
-                year: 2005,
-                mission: "每一個人都獨一無二，連結你我共融一心",
-                target: "殘疾人士、基層婦女、長者",
-                categories: ["餐飲", "禮品", "殘疾就業", "長者"],
-                products: ["烘焙食品（餅店、網購）", "餐飲服務", "手工藝品", "長者護理服務"],
-                esg: ["企業節慶禮品採購（曲奇、月餅）", "員工團隊活動（手工藝工作坊）", "弱勢就業資助計劃"],
-                keywords: ["烘焙", "曲奇", "月餅", "餐飲", "禮品", "婦女", "長者"]
-            },
-            {
-                id: 4,
-                name: "香港盲人輔導會 盲人工廠",
-                nameEn: "Hong Kong Society for the Blind — Forward Factory",
-                year: 1963,
-                mission: "為視障及殘疾人士提供多元化工作訓練，達致自力更新",
-                target: "視障人士、殘疾人士",
-                categories: ["殘疾就業", "洗衣", "清潔"],
-                products: ["洗衣服務", "清潔服務", "紙品包裝", "手工藝品"],
-                esg: ["企業洗衣服務外判", "環保紙品採購", "殘疾就業支援捐贈"],
-                keywords: ["視障", "盲人", "洗衣", "清潔", "包裝", "手工藝"]
-            },
-            {
-                id: 5,
-                name: "明途聯繫有限公司",
-                nameEn: "MindT Link",
-                year: 2003,
-                mission: "為精神病康復者創造具尊嚴的就業機會",
-                target: "精神病康復者、智障人士",
-                categories: ["殘疾就業", "心理健康", "餐飲", "零售"],
-                products: ["卓思廊復康用品專賣店", "便利店業務", "餐飲業務（復康餐廳）", "復康用品網購"],
-                esg: ["企業健康計劃合作（心理健康工作坊）", "員工復康用品福利", "節慶禮品採購"],
-                keywords: ["精神健康", "心理", "復康", "便利店", "餐飲", "復康用品"]
-            },
-            {
-                id: 6,
-                name: "聖雅各福群會 社企服務",
-                nameEn: "St. James' Settlement Social Enterprise",
-                year: 1872,
-                mission: "為弱勢社群提供持續發展的就業機會",
-                target: "青少年、長者、低收入家庭、殘疾人士",
-                categories: ["餐飲", "環保", "青年", "長者"],
-                products: ["社區餐廳及咖啡店", "烘焙及食品製作", "社區回收及環保服務", "藝術治療工作坊"],
-                esg: ["企業ESG活動合作", "社區扶貧計劃捐贈", "環保回收計劃參與"],
-                keywords: ["餐廳", "咖啡", "烘焙", "環保", "回收", "藝術治療", "扶貧"]
-            },
-            {
-                id: 7,
-                name: "香港紅十字會 社企項目",
-                nameEn: "Hong Kong Red Cross Social Enterprise",
-                year: 1950,
-                mission: "以人道主義精神為弱勢社群提供就業訓練",
-                target: "殘疾人士、弱勢家庭、受災群眾",
-                categories: ["殘疾就業", "禮品", "環保"],
-                products: ["手工藝品零售", "救災物資包裝", "急救培訓服務"],
-                esg: ["企業救災捐款配對", "人道主義培訓工作坊", "志願服務團體參與"],
-                keywords: ["紅十字會", "救災", "急救", "志願", "人道", "手工藝"]
-            },
-            {
-                id: 8,
-                name: "鄰舍輔導會 社企服務",
-                nameEn: "The Neighbourhood Advice-Action Council Enterprise",
-                year: 1968,
-                mission: "助鄰扶老，服務社群，促進社區共融",
-                target: "長者、青少年、基層家庭、殘疾人士",
-                categories: ["長者", "青年", "環保"],
-                products: ["長者護理及家居服務", "社區教育服務", "環保清潔服務", "手工藝品"],
-                esg: ["企業長者關懷計劃", "社區服務日志願活動", "ESG報告社區參與指標"],
-                keywords: ["長者", "護理", "社區", "清潔", "環保", "青少年"]
-            },
-            {
-                id: 9,
-                name: "扶康會 社企服務",
-                nameEn: "Fu Hong Society Social Enterprise",
-                year: 1977,
-                mission: "為智障及肢體傷殘人士提供優質康復及就業服務",
-                target: "智障人士、肢體傷殘人士、精神康復者",
-                categories: ["殘疾就業", "餐飲", "洗衣"],
-                products: ["餐飲服務（扶康餐廳）", "洗衣服務", "清潔服務", "手工藝品"],
-                esg: ["企業團體膳食服務", "殘疾就業計劃合作", "節慶禮品採購"],
-                keywords: ["智障", "殘疾", "餐飲", "洗衣", "清潔", "扶康"]
-            },
-            {
-                id: 10,
-                name: "香港中華煤氣公司 社企伙伴",
-                nameEn: "Towngas Social Enterprise Partners",
-                year: 1862,
-                mission: "推動弱勢社群就業，實踐企業社會責任",
-                target: "殘疾人士、弱勢青少年、基層家庭",
-                categories: ["環保", "培訓", "長者"],
-                products: ["環保教育計劃", "能源效益諮詢", "技能培訓工作坊"],
-                esg: ["企業節慶福袋（弱勢社群援助）", "環保教育活動合作", "技能培訓資助"],
-                keywords: ["煤氣", "環保", "能源", "培訓", "福袋", "弱勢"]
-            },
-            {
-                id: 11,
-                name: "基督教家庭服務中心 社企",
-                nameEn: "Christian Family Service Centre SE",
-                year: 1970,
-                mission: "以基督教精神服務社區，支援基層家庭",
-                target: "基層家庭、婦女、青少年、兒童",
-                categories: ["餐飲", "環保", "青年", "家庭"],
-                products: ["社區餐飲服務", "環保回收及升級再造產品", "家庭及青少年支援服務", "手工藝品零售"],
-                esg: ["企業家庭日活動", "環保升級再造工作坊", "ESG社區投資計劃"],
-                keywords: ["家庭", "婦女", "青少年", "餐飲", "環保", "升級再造"]
-            },
-            {
-                id: 12,
-                name: "香港善導會 社企服務",
-                nameEn: "Hong Kong Sheng Kung Hui Welfare Council Social Enterprise",
-                year: 1865,
-                mission: "支援邊緣青少年及釋囚重投社會",
-                target: "邊緣青少年、釋囚、基層青年",
-                categories: ["青年", "餐飲", "培訓"],
-                products: ["餐飲服務（社企餐廳）", "手工藝品", "青少年培訓計劃", "咖啡店"],
-                esg: ["企業團隊訓練活動", "青少年就業計劃合作", "CSR活動策劃"],
-                keywords: ["青少年", "釋囚", "餐飲", "咖啡", "培訓", "邊緣青年"]
-            },
-            {
-                id: 13,
-                name: "環保探索有限公司",
-                nameEn: "Eco Explorer Ltd",
-                year: 2010,
-                mission: "透過環保教育及體驗，推動可持續生活方式",
-                target: "學校、企業、社區團體",
-                categories: ["環保", "培訓"],
-                products: ["環保教育課程及工作坊", "企業可持續發展培訓", "環保產品零售", "升級再造工作坊"],
-                esg: ["企業ESG培訓工作坊", "減碳及可持續發展顧問", "環保團隊建立活動"],
-                keywords: ["環保", "ESG", "可持續", "減碳", "教育", "工作坊", "升級再造"]
-            },
-            {
-                id: 14,
-                name: "公平棧",
-                nameEn: "Fair Trade Hong Kong",
-                year: 2006,
-                mission: "推動公平貿易，支持發展中國家農民及工匠",
-                target: "發展中國家農民、本地社區",
-                categories: ["禮品", "環保"],
-                products: ["公平貿易產品零售", "巧克力、咖啡、茶葉、蜂蜜", "手織品及工藝品", "企業禮品方案"],
-                esg: ["企業節慶禮品採購（道德消費）", "公平貿易教育培訓", "ESG供應鏈優化建議"],
-                keywords: ["公平貿易", "咖啡", "巧克力", "茶葉", "禮品", "道德消費", "供應鏈"]
-            },
-            {
-                id: 15,
-                name: "活在一片天",
-                nameEn: "Living Dreams",
-                year: 2011,
-                mission: "為精神病康復者提供藝術發展及就業機會",
-                target: "精神病康復者、精神健康需要人士",
-                categories: ["心理健康", "藝術"],
-                products: ["藝術作品零售及展覽", "藝術治療工作坊", "企業心理健康培訓", "藝術商品定製"],
-                esg: ["企業藝術品收藏及陳列", "員工心理健康日活動", "公益拍賣捐贈"],
-                keywords: ["精神健康", "藝術", "展覽", "藝術治療", "心理健康"]
-            },
-            {
-                id: 16,
-                name: "黑暗中一道光",
-                nameEn: "A Bright Light in the Dark",
-                year: 2015,
-                mission: "為視障及低收入青年提供數碼技能培訓",
-                target: "視障人士、低收入青年、SEN青年",
-                categories: ["殘疾就業", "青年", "培訓"],
-                products: ["數碼技能培訓（平面設計、社交媒體運營）", "弱勢青年就業配對", "科技輔助工具訓練"],
-                esg: ["企業數碼化培訓合作", "包容性科技應用工作坊", "青年見習計劃"],
-                keywords: ["視障", "數碼", "設計", "青年", "培訓", "科技", "SEN"]
-            },
-            {
-                id: 17,
-                name: "香港融樂會",
-                nameEn: "Hong Kong Unison",
-                year: 2001,
-                mission: "促進少數族裔融入香港社會，推動種族平等",
-                target: "少數族裔人士（南亞裔、東南亞裔為主）",
-                categories: ["殘疾就業", "培訓", "青年"],
-                products: ["語言培訓服務（粵語、英語、普通話）", "就業輔導及轉介", "文化共融活動策劃", "翻譯及傳譯服務"],
-                esg: ["企業多元共融培訓（DEI工作坊）", "少數族裔人才實習計劃", "跨境文化交流活動"],
-                keywords: ["少數族裔", "DEI", "多元", "語言培訓", "翻譯", "文化共融"]
-            },
-            {
-                id: 18,
-                name: "廚師之選",
-                nameEn: "Chef's Choice",
-                year: 2016,
-                mission: "為基層青年提供專業餐飲培訓及就業機會",
-                target: "基層青年（16-24歲）、待業人士",
-                categories: ["餐飲", "青年", "培訓"],
-                products: ["餐飲培訓課程", "外賣餐飲服務", "企業餐飲 catering", "廚藝比賽及活動"],
-                esg: ["企業活動餐飲服務", "青年餐飲見習計劃", "ESG扶貧教育資助"],
-                keywords: ["餐飲", "培訓", "青年", "外賣", "catering", "廚藝", "扶貧"]
-            },
-            {
-                id: 19,
-                name: "惜食堂",
-                nameEn: "Food Angel",
-                year: 2011,
-                mission: "從飲食界回收仍可安全食用之剩餘食物，煮成免費飯餐給予需要的人",
-                target: "基層家庭、長者、食物銀行",
-                categories: ["餐飲", "環保", "志願"],
-                products: ["免費飯餐製作及派發", "食物回收及分配", "企業食物捐贈計劃", "環保教育"],
-                esg: ["企業食物捐贈（ESG減廢指標）", "員工志願服務（包飯活動）", "ESG年度報告社區指標", "企業剩食回收合作"],
-                keywords: ["食物回收", "剩食", "飯餐", "環保", "減廢", "志願服務", "ESG"]
-            },
-            {
-                id: 20,
-                name: "永年茶餐廳",
-                nameEn: "Wing Nien Restaurant",
-                year: 2017,
-                mission: "為基層青年及釋囚提供餐飲業培訓及就業機會，傳承香港地道飲食文化",
-                target: "基層青年、釋囚、待業人士",
-                categories: ["餐飲", "青年"],
-                products: ["茶餐廳餐飲服務", "餐飲培訓工作坊", "企業 catering", "香港傳統美食零售"],
-                esg: ["企業團體餐飲服務", "餐飲見習及實習計劃", "CSR活動合作（包場服務）"],
-                keywords: ["茶餐廳", "餐飲", "青年", "培訓", "catering", "香港美食", "釋囚"]
-            }
-        ];
-        
-        // 搜索函数
-        function search() {
-            const category = document.getElementById('category').value;
-            const budget = document.getElementById('budget').value;
-            const event = document.getElementById('event').value;
-            const details = document.getElementById('details').value.toLowerCase();
-            
-            if (!category && !details && !event) {
-                alert('請至少選擇一個需求類別或填寫詳細說明');
-                return;
-            }
-            
-            // 匹配算法
-            let results = socialEnterprises.map(se => {
-                let score = 0;
-                let matchedReasons = [];
-                
-                // 类别匹配
-                if (category && se.categories.includes(category)) {
-                    score += 30;
-                    matchedReasons.push(`類別匹配: ${category}`);
-                }
-                
-                // 活动类型匹配
-                const eventKeywords = {
-                    '節慶': ['禮品', '節慶', '中秋', '新年', '月餅', '曲奇'],
-                    '團隊': ['工作坊', '培訓', '團隊', '活動'],
-                    '家庭': ['家庭', '兒童', '親子'],
-                    '志願': ['志願', '服務', '捐贈', '公益'],
-                    '培訓': ['培訓', '工作坊', '課程'],
-                    '採購': ['禮品', '採購', '零售']
-                };
-                
-                if (event && eventKeywords[event]) {
-                    const keywords = eventKeywords[event];
-                    const hasMatch = se.keywords.some(k => keywords.includes(k)) || 
-                                    se.products.some(p => keywords.some(k => p.includes(k)));
-                    if (hasMatch) {
-                        score += 20;
-                        matchedReasons.push(`活動類型匹配: ${event}`);
-                    }
-                }
-                
-                // 关键词匹配（详细说明）
-                if (details) {
-                    const detailWords = details.split(/[\s,，。、]+/).filter(w => w.length > 1);
-                    let keywordMatches = 0;
-                    
-                    detailWords.forEach(word => {
-                        if (se.keywords.some(k => k.includes(word))) keywordMatches++;
-                        if (se.products.some(p => p.includes(word))) keywordMatches++;
-                        if (se.mission.includes(word)) keywordMatches++;
-                    });
-                    
-                    if (keywordMatches > 0) {
-                        score += Math.min(keywordMatches * 10, 40);
-                        matchedReasons.push(`關鍵詞匹配`);
-                    }
-                }
-                
-                // 特殊关键词加分
-                const boostKeywords = ['ESG', 'CSR', '企業', '員工', '活動', '培訓'];
-                boostKeywords.forEach(k => {
-                    if (details.includes(k.toLowerCase()) && se.keywords.includes(k)) {
-                        score += 5;
-                    }
-                });
-                
-                return { ...se, score, matchedReasons };
-            });
-            
-            // 筛选和排序
-            results = results.filter(se => se.score > 0)
-                            .sort((a, b) => b.score - a.score)
-                            .slice(0, 10);
-            
-            // 显示结果
-            displayResults(results);
-        }
-        
-        function displayResults(results) {
-            const resultsSection = document.getElementById('results');
-            const resultsList = document.getElementById('results-list');
-            const resultsCount = document.getElementById('results-count');
-            
-            resultsSection.classList.remove('hidden');
-            resultsCount.textContent = `${results.length} 間社企`;
-            
-            if (results.length === 0) {
-                resultsList.innerHTML = `
-                    <div class="no-results">
-                        <div class="no-results-icon">🔍</div>
-                        <p>沒有找到匹配的社企</p>
-                        <p style="font-size: 0.9rem; margin-top: 10px;">請嘗試調整搜索條件</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            resultsList.innerHTML = results.map(se => `
-                <div class="result-card">
-                    <div class="result-name">
-                        ${se.name} <span>| ${se.nameEn}</span>
-                        <span class="match-score">${se.score}% 匹配</span>
-                    </div>
-                    <div class="result-mission">🎯 ${se.mission}</div>
-                    <div class="result-tags">
-                        ${se.categories.map(c => `<span class="tag">${c}</span>`).join('')}
-                    </div>
-                    <div class="result-esg">
-                        <div class="result-esg-title">💡 ESG/CSR 合作方案</div>
-                        <ul>
-                            ${se.esg.slice(0, 3).map(e => `<li>${e}</li>`).join('')}
-                        </ul>
+    </section>
+
+    <!-- 服務類別 -->
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">企業需求類別</h2>
+            <div class="category-grid">
+                <a href="search.html?category=餐飲" class="category-card">
+                    <div class="category-icon">🍽️</div>
+                    <h3>餐飲服務</h3>
+                    <p>員工聚餐、活動餐飲、到會服務</p>
+                    <span class="category-count">15 間社企</span>
+                </a>
+                <a href="search.html?category=禮品" class="category-card">
+                    <div class="category-icon">🎁</div>
+                    <h3>節慶禮品</h3>
+                    <p>中秋月餅、新年禮盒、員工福利</p>
+                    <span class="category-count">12 間社企</span>
+                </a>
+                <a href="search.html?category=活動" class="category-card">
+                    <div class="category-icon">👥</div>
+                    <h3>員工活動</h3>
+                    <p>團隊建立、工作坊、志願服務</p>
+                    <span class="category-count">18 間社企</span>
+                </a>
+                <a href="search.html?category=環保" class="category-card">
+                    <div class="category-icon">🌱</div>
+                    <h3>環保方案</h3>
+                    <p>ESG培訓、減碳顧問、升級再造</p>
+                    <span class="category-count">8 間社企</span>
+                </a>
+                <a href="search.html?category=殘疾就業" class="category-card">
+                    <div class="category-icon">♿</div>
+                    <h3>殘疾就業</h3>
+                    <p>傷健共融培訓、無障礙顧問</p>
+                    <span class="category-count">20 間社企</span>
+                </a>
+                <a href="search.html?category=長者" class="category-card">
+                    <div class="category-icon">👴</div>
+                    <h3>長者服務</h3>
+                    <p>長者關懷計劃、銀髮產品</p>
+                    <span class="category-count">10 間社企</span>
+                </a>
+                <a href="search.html?category=青年" class="category-card">
+                    <div class="category-icon">🎓</div>
+                    <h3>青年培訓</h3>
+                    <p>見習計劃、技能培訓、就業配對</p>
+                    <span class="category-count">12 間社企</span>
+                </a>
+                <a href="search.html?category=藝術" class="category-card">
+                    <div class="category-icon">🎨</div>
+                    <h3>藝術文化</h3>
+                    <p>藝術工作坊、作品展覽、文化活動</p>
+                    <span class="category-count">8 間社企</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 社會價值標籤 -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">社會價值標籤</h2>
+            <p class="section-subtitle">每間社企都標籤化其社會價值，讓企業精準配對</p>
+            <div class="tag-cloud">
+                <div class="tag-group">
+                    <h4>服務對象</h4>
+                    <div class="tags">
+                        <span class="tag tag-blue">殘疾就業</span>
+                        <span class="tag tag-blue">長者服務</span>
+                        <span class="tag tag-blue">青年就業</span>
+                        <span class="tag tag-blue">婦女支援</span>
+                        <span class="tag tag-blue">少數族裔</span>
+                        <span class="tag tag-blue">基層家庭</span>
+                        <span class="tag tag-blue">精神健康</span>
+                        <span class="tag tag-blue">智障人士</span>
+                        <span class="tag tag-blue">視障人士</span>
+                        <span class="tag tag-blue">聽障人士</span>
                     </div>
                 </div>
-            `).join('');
-            
-            // 滚动到结果区域
-            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    </script>
+                <div class="tag-group">
+                    <h4>社會影響</h4>
+                    <div class="tags">
+                        <span class="tag tag-purple">傷健共融</span>
+                        <span class="tag tag-purple">扶貧脫困</span>
+                        <span class="tag tag-purple">社區共融</span>
+                        <span class="tag tag-purple">精神康復</span>
+                        <span class="tag tag-purple">長者關懷</span>
+                        <span class="tag tag-purple">青年發展</span>
+                        <span class="tag tag-purple">家庭支援</span>
+                        <span class="tag tag-purple">就業培訓</span>
+                        <span class="tag tag-purple">社會創新</span>
+                    </div>
+                </div>
+                <div class="tag-group">
+                    <h4>環境價值</h4>
+                    <div class="tags">
+                        <span class="tag tag-green">環保減廢</span>
+                        <span class="tag tag-green">升級再造</span>
+                        <span class="tag tag-green">公平貿易</span>
+                        <span class="tag tag-green">可持續發展</span>
+                        <span class="tag tag-green">有機農業</span>
+                        <span class="tag tag-green">綠色生活</span>
+                        <span class="tag tag-green">低碳環保</span>
+                    </div>
+                </div>
+                <div class="tag-group">
+                    <h4>企業方案</h4>
+                    <div class="tags">
+                        <span class="tag tag-orange">禮品採購</span>
+                        <span class="tag tag-orange">員工活動</span>
+                        <span class="tag tag-orange">培訓工作坊</span>
+                        <span class="tag tag-orange">餐飲服務</span>
+                        <span class="tag tag-orange">清潔服務</span>
+                        <span class="tag tag-orange">洗衣服務</span>
+                        <span class="tag tag-orange">設計印刷</span>
+                        <span class="tag tag-orange">活動策劃</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 精選社企 -->
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">精選社會企業</h2>
+            <div class="featured-se-grid">
+                <div class="featured-se-card">
+                    <div class="se-badge">SEE Mark 創越級</div>
+                    <h3>長者安居協會</h3>
+                    <p class="se-mission">讓長者可隨心選擇在社區過著有素質的晚年生活</p>
+                    <div class="se-tags">
+                        <span class="tag tag-blue">長者服務</span>
+                        <span class="tag tag-purple">長者關懷</span>
+                        <span class="tag tag-purple">科技應用</span>
+                    </div>
+                    <p class="se-products">平安鐘、隨身寶、管家易上門服務</p>
+                    <a href="detail.html?id=SE-015" class="btn btn-outline">查看詳情</a>
+                </div>
+                <div class="featured-se-card">
+                    <div class="se-badge">SEE Mark 創越級</div>
+                    <h3>黑暗中對話</h3>
+                    <p class="se-mission">促進社會共融，讓視障人士展現能力</p>
+                    <div class="se-tags">
+                        <span class="tag tag-blue">視障人士</span>
+                        <span class="tag tag-purple">傷健共融</span>
+                        <span class="tag tag-orange">培訓工作坊</span>
+                    </div>
+                    <p class="se-products">黑暗體驗工作坊、企業培訓、視障就業機會</p>
+                    <a href="detail.html?id=SE-025" class="btn btn-outline">查看詳情</a>
+                </div>
+                <div class="featured-se-card">
+                    <div class="se-badge">SEE Mark 創越級</div>
+                    <h3>惜食堂</h3>
+                    <p class="se-mission">回收剩餘食物，煮成免費飯餐給予需要的人</p>
+                    <div class="se-tags">
+                        <span class="tag tag-green">環保減廢</span>
+                        <span class="tag tag-purple">扶貧脫困</span>
+                        <span class="tag tag-orange">員工活動</span>
+                    </div>
+                    <p class="se-products">免費飯餐、食物回收、企業食物捐贈計劃</p>
+                    <a href="detail.html?id=SE-014" class="btn btn-outline">查看詳情</a>
+                </div>
+            </div>
+            <div class="section-cta">
+                <a href="search.html" class="btn btn-primary btn-large">查看全部 50+ 社企</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta-section">
+        <div class="container">
+            <h2>準備好開始配對了嗎？</h2>
+            <p>輸入您的企業需求，找到最合適的社企伙伴</p>
+            <a href="search.html" class="btn btn-primary btn-large">🔍 立即配對</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>🎯 IMPACT MATCH</h3>
+                    <p>企業—社企智能配對平台</p>
+                </div>
+                <div class="footer-links">
+                    <h4>快速連結</h4>
+                    <a href="search.html">搜尋配對</a>
+                    <a href="#how-it-works">運作方式</a>
+                    <a href="https://sedirectory.org.hk" target="_blank">社企指南</a>
+                </div>
+                <div class="footer-links">
+                    <h4>資料來源</h4>
+                    <a href="https://sechamber.hk" target="_blank">香港社會企業總會</a>
+                    <a href="https://seemark.hk" target="_blank">社企認證 SEE Mark</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>IMPACT MATCH MVP © 2026 | 資料來自公開來源，僅供參考</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜尋配對 — IMPACT MATCH</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="search-page">
+    <div class="search-header">
+        <a href="index.html" class="btn btn-secondary" style="margin-bottom: 15px; padding: 8px 16px;">← 返回首頁</a>
+        <h1>🎯 社企配對搜尋</h1>
+        <p>選擇需求類別，找到最合適的社企伙伴</p>
+    </div>
+    
+    <div class="search-card">
+        <div class="form-group">
+            <label for="category">需求類別 *</label>
+            <select id="category">
+                <option value="">-- 請選擇 --</option>
+                <option value="餐飲">🍽️ 餐飲服務</option>
+                <option value="禮品">🎁 節慶禮品</option>
+                <option value="活動">👥 員工活動 / 團隊建立</option>
+                <option value="環保">🌱 環保 / 可持續發展</option>
+                <option value="殘疾就業">♿ 殘疾人士就業支援</option>
+                <option value="長者">👴 長者服務</option>
+                <option value="青年">🎓 青年培訓</option>
+                <option value="藝術">🎨 藝術 / 文化</option>
+                <option value="心理健康">🧠 心理健康</option>
+                <option value="其他">📦 其他</option>
+            </select>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="budget">預算範圍（港幣）</label>
+                <select id="budget">
+                    <option value="">-- 不限 --</option>
+                    <option value="5000">$5,000 以下</option>
+                    <option value="10000">$5,000 - $10,000</option>
+                    <option value="50000">$10,000 - $50,000</option>
+                    <option value="100000">$50,000 - $100,000</option>
+                    <option value="100001">$100,000 以上</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="event">活動類型</label>
+                <select id="event">
+                    <option value="">-- 不限 --</option>
+                    <option value="節慶">節慶活動（中秋、新年等）</option>
+                    <option value="團隊">團隊建立</option>
+                    <option value="家庭">家庭日</option>
+                    <option value="志願">員工志願服務</option>
+                    <option value="培訓">員工培訓</option>
+                    <option value="採購">日常採購</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="details">詳細需求說明</label>
+            <textarea id="details" rows="4" placeholder="請描述您的具體需求，例如：&#10;- 活動人數：100 人&#10;- 活動日期：2026年5月&#10;- 希望達成的社會影響：支援弱勢社群就業&#10;- 其他特別要求..."></textarea>
+        </div>
+        
+        <button class="btn btn-primary btn-large" onclick="search()" style="width: 100%;">
+            🔍 搜尋配對
+        </button>
+    </div>
+    
+    <div id="results" class="results-section hidden">
+        <div class="results-header">
+            <h2>配對結果</h2>
+            <span id="results-count" class="results-count">0 間社企</span>
+        </div>
+        <div id="results-list"></div>
+    </div>
+    
+    <script src="js/database.js"></script>
+    <script src="js/search.js"></script>
+</body>
+</html>

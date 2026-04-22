@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社企詳情 — IMPACT MATCH</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="detail-page">
+    <div class="detail-header">
+        <a href="search.html" class="btn btn-secondary" style="margin-bottom: 15px; padding: 8px 16px;">← 返回搜尋</a>
+        <h1 id="se-name">載入中...</h1>
+        <div class="name-en" id="se-name-en"></div>
+        <div id="se-badge" class="se-badge"></div>
+    </div>
+    
+    <div class="detail-content">
+        <div class="detail-section">
+            <h2>📋 基本資料</h2>
+            <div class="detail-info">
+                <div class="info-item">
+                    <label>成立年份</label>
+                    <span id="se-year">-</span>
+                </div>
+                <div class="info-item">
+                    <label>類別</label>
+                    <span id="se-category">-</span>
+                </div>
+                <div class="info-item">
+                    <label>服務地區</label>
+                    <span id="se-districts">-</span>
+                </div>
+                <div class="info-item">
+                    <label>聯絡語言</label>
+                    <span id="se-languages">-</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="detail-section">
+            <h2>🎯 使命</h2>
+            <p id="se-mission" style="color: var(--text-light); line-height: 1.8;"></p>
+        </div>
+        
+        <div class="detail-section">
+            <h2>👥 服務對象</h2>
+            <p id="se-target" style="color: var(--text-light);"></p>
+        </div>
+        
+        <div class="detail-section">
+            <h2>🏷️ 社會價值標籤</h2>
+            <div id="se-tags" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+        </div>
+        
+        <div class="detail-section">
+            <h2>📦 產品 / 服務</h2>
+            <ul id="se-products" style="margin: 0; padding-left: 25px; color: var(--text-light);"></ul>
+        </div>
+        
+        <div class="detail-section">
+            <h2>💡 ESG/CSR 合作方案</h2>
+            <ul id="se-esg" style="margin: 0; padding-left: 25px; color: var(--text-light);"></ul>
+        </div>
+        
+        <div class="detail-section">
+            <h2>📍 聯絡資訊</h2>
+            <div class="detail-info">
+                <div class="info-item">
+                    <label>網站</label>
+                    <span id="se-website">-</span>
+                </div>
+                <div class="info-item">
+                    <label>聯絡方式</label>
+                    <span id="se-contact">-</span>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="search.html" class="btn btn-secondary">← 繼續搜尋</a>
+        </div>
+    </div>
+    
+    <script src="js/database.js"></script>
+    <script src="js/detail.js"></script>
+</body>
+</html>
