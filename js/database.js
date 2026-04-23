@@ -1,391 +1,127 @@
-// IMPACT MATCH - 資料庫
-const socialEnterprises = [
-    {
-        id: "SE-001",
-        name: "側聞聯繫有限公司",
-        nameEn: "SideBySide",
-        year: 2014,
-        mission: "透過創意產業培訓及聘用自閉症及殘疾青年",
-        targetGroup: "自閉症及殘疾青年（14-30歲）",
-        category: "創意產業",
-        serviceTags: ["殘疾就業", "青年就業", "藝術文化"],
-        impactTags: ["傷健共融", "青年發展", "社會創新"],
-        enterpriseTags: ["培訓工作坊", "活動策劃", "設計印刷"],
-        productsServices: ["創意工作坊（平面設計、手工藝、動畫）", "企業培訓活動策劃", "藝術商品零售"],
-        esgPlans: ["企業團隊建立工作坊（包容文化培訓）", "殘疾藝術家作品收藏與饋贈", "員工志願服務體驗"],
-        keywords: ["自閉症", "殘疾", "創意", "藝術", "工作坊", "設計", "手工藝"],
-        districts: ["灣仔", "觀塘"],
-        seeMarkLevel: "創建級",
-        languages: ["粵語", "英語"],
-        website: "https://sidebyside.org.hk"
-    },
-    {
-        id: "SE-002",
-        name: "香港復康力量",
-        nameEn: "Hong Kong Rehabilitation Power",
-        year: 1995,
-        mission: "推動傷健共融，幫助殘疾人士增加就業機會",
-        targetGroup: "肢體傷殘、視障、聽障、長期病患者、精神病康復者",
-        category: "復康服務",
-        serviceTags: ["殘疾就業", "視障人士", "聽障人士", "精神健康"],
-        impactTags: ["傷健共融", "就業培訓", "社區共融"],
-        enterpriseTags: ["培訓工作坊", "餐飲服務"],
-        productsServices: ["活力店（醫院連鎖店）", "就業培訓及轉介服務", "無障礙旅遊顧問"],
-        esgPlans: ["企業無障礙工作環境顧問", "殘疾就業計劃合作", "傷健共融培訓工作坊"],
-        keywords: ["殘疾", "復康", "就業", "培訓", "無障礙", "醫院"],
-        districts: ["沙田", "葵青", "黃大仙", "離島"],
-        languages: ["粵語", "英語"],
-        website: "https://www.rehabpower.org.hk"
-    },
-    {
-        id: "SE-003",
-        name: "保良局 ONE 社企",
-        nameEn: "Po Leung Kuk ONE Social Enterprise",
-        year: 2005,
-        mission: "每一個人都獨一無二，連結你我共融一心",
-        targetGroup: "殘疾人士、基層婦女、長者",
-        category: "餐飲零售",
-        serviceTags: ["殘疾就業", "婦女支援", "長者服務"],
-        impactTags: ["傷健共融", "社區共融", "就業培訓"],
-        enterpriseTags: ["禮品採購", "餐飲服務", "員工活動"],
-        productsServices: ["烘焙食品（餅店、網購）", "餐飲服務", "手工藝品", "長者護理服務"],
-        esgPlans: ["企業節慶禮品採購（曲奇、月餅）", "員工團隊活動（手工藝工作坊）", "弱勢就業資助計劃"],
-        keywords: ["烘焙", "曲奇", "月餅", "餐飲", "禮品", "婦女", "長者"],
-        districts: ["全港各區"],
-        seeMarkLevel: "創進級",
-        languages: ["粵語", "英語"],
-        website: "https://www.poleungkuk.org.hk"
-    },
-    {
-        id: "SE-004",
-        name: "香港盲人輔導會 盲人工廠",
-        nameEn: "Hong Kong Society for the Blind — Forward Factory",
-        year: 1963,
-        mission: "為視障及殘疾人士提供多元化工作訓練，達致自力更新",
-        targetGroup: "視障人士、殘疾人士",
-        category: "工業服務",
-        serviceTags: ["殘疾就業", "視障人士"],
-        impactTags: ["傷健共融", "就業培訓", "自力更生"],
-        enterpriseTags: ["洗衣服務", "清潔服務"],
-        productsServices: ["洗衣服務", "清潔服務", "紙品包裝", "手工藝品"],
-        esgPlans: ["企業洗衣服務外判", "環保紙品採購", "殘疾就業支援捐贈"],
-        keywords: ["視障", "盲人", "洗衣", "清潔", "包裝", "手工藝"],
-        districts: ["觀塘"],
-        languages: ["粵語"],
-        website: "https://www.hksb.org.hk"
-    },
-    {
-        id: "SE-005",
-        name: "明途聯繫有限公司",
-        nameEn: "MindT Link",
-        year: 2003,
-        mission: "為精神病康復者創造具尊嚴的就業機會",
-        targetGroup: "精神病康復者、智障人士",
-        category: "零售餐飲",
-        serviceTags: ["殘疾就業", "精神健康", "智障人士"],
-        impactTags: ["精神康復", "傷健共融", "就業培訓"],
-        enterpriseTags: ["餐飲服務", "禮品採購"],
-        productsServices: ["卓思廊復康用品專賣店", "便利店業務", "餐飲業務（復康餐廳）", "復康用品網購"],
-        esgPlans: ["企業健康計劃合作（心理健康工作坊）", "員工復康用品福利", "節慶禮品採購"],
-        keywords: ["精神健康", "心理", "復康", "便利店", "餐飲", "復康用品"],
-        districts: ["全港各區"],
-        seeMarkLevel: "創越級",
-        languages: ["粵語", "英語"],
-        website: "https://www.mhahk.org.hk"
-    },
-    {
-        id: "SE-006",
-        name: "聖雅各福群會 社企服務",
-        nameEn: "St. James' Settlement Social Enterprise",
-        year: 1949,
-        mission: "為弱勢社群提供持續發展的就業機會",
-        targetGroup: "青少年、長者、低收入家庭、殘疾人士",
-        category: "綜合服務",
-        serviceTags: ["青年就業", "長者服務", "基層家庭", "殘疾就業"],
-        impactTags: ["社區共融", "就業培訓", "扶貧脫困"],
-        enterpriseTags: ["餐飲服務", "培訓工作坊", "員工活動"],
-        productsServices: ["社區餐廳及咖啡店", "烘焙及食品製作", "社區回收及環保服務", "藝術治療工作坊"],
-        esgPlans: ["企業ESG活動合作", "社區扶貧計劃捐贈", "環保回收計劃參與"],
-        keywords: ["餐廳", "咖啡", "烘焙", "環保", "回收", "藝術治療", "扶貧"],
-        districts: ["灣仔", "中西區", "東區"],
-        seeMarkLevel: "創越級",
-        languages: ["粵語", "英語"],
-        website: "https://www.sjs.org.hk"
-    },
-    {
-        id: "SE-007",
-        name: "香港紅十字會 社企項目",
-        nameEn: "Hong Kong Red Cross Social Enterprise",
-        year: 1950,
-        mission: "以人道主義精神為弱勢社群提供就業訓練",
-        targetGroup: "殘疾人士、弱勢家庭、受災群眾",
-        category: "人道服務",
-        serviceTags: ["殘疾就業", "基層家庭"],
-        impactTags: ["傷健共融", "人道支援", "社區共融"],
-        enterpriseTags: ["禮品採購", "培訓工作坊"],
-        productsServices: ["手工藝品零售", "救災物資包裝", "急救培訓服務"],
-        esgPlans: ["企業救災捐款配對", "人道主義培訓工作坊", "志願服務團體參與"],
-        keywords: ["紅十字會", "救災", "急救", "志願", "人道", "手工藝"],
-        districts: ["全港各區"],
-        languages: ["粵語", "英語"],
-        website: "https://www.redcross.org.hk"
-    },
-    {
-        id: "SE-008",
-        name: "鄰舍輔導會 社企服務",
-        nameEn: "The Neighbourhood Advice-Action Council Enterprise",
-        year: 1968,
-        mission: "助鄰扶老，服務社群，促進社區共融",
-        targetGroup: "長者、青少年、基層家庭、殘疾人士",
-        category: "社會服務",
-        serviceTags: ["長者服務", "青年就業", "基層家庭", "殘疾就業"],
-        impactTags: ["長者關懷", "社區共融", "家庭支援"],
-        enterpriseTags: ["清潔服務", "培訓工作坊"],
-        productsServices: ["長者護理及家居服務", "社區教育服務", "環保清潔服務", "手工藝品"],
-        esgPlans: ["企業長者關懷計劃", "社區服務日志願活動", "ESG報告社區參與指標"],
-        keywords: ["長者", "護理", "社區", "清潔", "環保", "青少年"],
-        districts: ["全港各區"],
-        languages: ["粵語"],
-        website: "https://www.naac.org.hk"
-    },
-    {
-        id: "SE-009",
-        name: "扶康會 社企服務",
-        nameEn: "Fu Hong Society Social Enterprise",
-        year: 1977,
-        mission: "為智障及肢體傷殘人士提供優質康復及就業服務",
-        targetGroup: "智障人士、肢體傷殘人士、精神康復者",
-        category: "復康服務",
-        serviceTags: ["殘疾就業", "智障人士", "精神健康"],
-        impactTags: ["傷健共融", "就業培訓", "精神康復"],
-        enterpriseTags: ["餐飲服務", "洗衣服務", "清潔服務"],
-        productsServices: ["餐飲服務（扶康餐廳）", "洗衣服務", "清潔服務", "手工藝品"],
-        esgPlans: ["企業團體膳食服務", "殘疾就業計劃合作", "節慶禮品採購"],
-        keywords: ["智障", "殘疾", "餐飲", "洗衣", "清潔", "扶康"],
-        districts: ["全港各區"],
-        seeMarkLevel: "創進級",
-        languages: ["粵語", "英語"],
-        website: "https://www.fuhong.org.hk"
-    },
-    {
-        id: "SE-010",
-        name: "環保探索有限公司",
-        nameEn: "Eco Explorer Ltd",
-        year: 2010,
-        mission: "透過環保教育及體驗，推動可持續生活方式",
-        targetGroup: "學校、企業、社區團體",
-        category: "環保教育",
-        serviceTags: [],
-        impactTags: ["環保減廢", "可持續發展", "社會創新"],
-        enterpriseTags: ["培訓工作坊", "員工活動"],
-        productsServices: ["環保教育課程及工作坊", "企業可持續發展培訓", "環保產品零售", "升級再造工作坊"],
-        esgPlans: ["企業ESG培訓工作坊", "減碳及可持續發展顧問", "環保團隊建立活動"],
-        keywords: ["環保", "ESG", "可持續", "減碳", "教育", "工作坊", "升級再造"],
-        languages: ["粵語", "英語"],
-        website: "https://www.ecoexplorer.hk"
-    },
-    {
-        id: "SE-011",
-        name: "公平棧",
-        nameEn: "Fair Trade Hong Kong",
-        year: 2006,
-        mission: "推動公平貿易，支持發展中國家農民及工匠",
-        targetGroup: "發展中國家農民、本地社區",
-        category: "公平貿易",
-        serviceTags: [],
-        impactTags: ["公平貿易", "可持續發展", "社會創新"],
-        enterpriseTags: ["禮品採購"],
-        productsServices: ["公平貿易產品零售", "巧克力、咖啡、茶葉、蜂蜜", "手織品及工藝品", "企業禮品方案"],
-        esgPlans: ["企業節慶禮品採購（道德消費）", "公平貿易教育培訓", "ESG供應鏈優化建議"],
-        keywords: ["公平貿易", "咖啡", "巧克力", "茶葉", "禮品", "道德消費", "供應鏈"],
-        languages: ["粵語", "英語"],
-        website: "https://www.fairtradehk.org"
-    },
-    {
-        id: "SE-012",
-        name: "活在一片天",
-        nameEn: "Living Dreams",
-        year: 2011,
-        mission: "為精神病康復者提供藝術發展及就業機會",
-        targetGroup: "精神病康復者、精神健康需要人士",
-        category: "藝術文化",
-        serviceTags: ["精神健康"],
-        impactTags: ["精神康復", "藝術治療", "傷健共融"],
-        enterpriseTags: ["禮品採購", "培訓工作坊"],
-        productsServices: ["藝術作品零售及展覽", "藝術治療工作坊", "企業心理健康培訓", "藝術商品定製"],
-        esgPlans: ["企業藝術品收藏及陳列", "員工心理健康日活動", "公益拍賣捐贈"],
-        keywords: ["精神健康", "藝術", "展覽", "藝術治療", "心理健康"],
-        languages: ["粵語", "英語"]
-    },
-    {
-        id: "SE-013",
-        name: "香港融樂會",
-        nameEn: "Hong Kong Unison",
-        year: 2001,
-        mission: "促進少數族裔融入香港社會，推動種族平等",
-        targetGroup: "少數族裔人士（南亞裔、東南亞裔為主）",
-        category: "多元共融",
-        serviceTags: ["少數族裔"],
-        impactTags: ["社區共融", "就業培訓", "社會創新"],
-        enterpriseTags: ["培訓工作坊"],
-        productsServices: ["語言培訓服務（粵語、英語、普通話）", "就業輔導及轉介", "文化共融活動策劃", "翻譯及傳譯服務"],
-        esgPlans: ["企業多元共融培訓（DEI工作坊）", "少數族裔人才實習計劃", "跨境文化交流活動"],
-        keywords: ["少數族裔", "DEI", "多元", "語言培訓", "翻譯", "文化共融"],
-        languages: ["粵語", "英語", "烏都語", "印地語", "尼泊爾語"],
-        website: "https://www.unison.org.hk"
-    },
-    {
-        id: "SE-014",
-        name: "惜食堂",
-        nameEn: "Food Angel",
-        year: 2011,
-        mission: "從飲食界回收仍可安全食用之剩餘食物，煮成免費飯餐給予需要的人",
-        targetGroup: "基層家庭、長者、食物銀行",
-        category: "食物回收",
-        serviceTags: ["基層家庭", "長者服務"],
-        impactTags: ["環保減廢", "扶貧脫困", "社區共融"],
-        enterpriseTags: ["員工活動"],
-        productsServices: ["免費飯餐製作及派發", "食物回收及分配", "企業食物捐贈計劃", "環保教育"],
-        esgPlans: ["企業食物捐贈（ESG減廢指標）", "員工志願服務（包飯活動）", "ESG年度報告社區指標", "企業剩食回收合作"],
-        keywords: ["食物回收", "剩食", "飯餐", "環保", "減廢", "志願服務", "ESG"],
-        districts: ["深水埗", "觀塘", "荃灣"],
-        seeMarkLevel: "創越級",
-        languages: ["粵語", "英語"],
-        website: "https://www.foodangel.org.hk"
-    },
-    {
-        id: "SE-015",
-        name: "長者安居協會",
-        nameEn: "Senior Citizen Home Safety Association",
-        year: 1996,
-        mission: "讓長者可隨心選擇在社區過著有素質的晚年生活",
-        targetGroup: "長者、有需要人士",
-        category: "長者服務",
-        serviceTags: ["長者服務"],
-        impactTags: ["長者關懷", "科技應用", "社會創新"],
-        enterpriseTags: ["培訓工作坊"],
-        productsServices: ["一線通平安鐘", "隨身寶", "平安手機", "智平安APP", "管家易上門服務"],
-        esgPlans: ["企業員工關顧計劃", "長者科技產品採購", "志願服務合作"],
-        keywords: ["平安鐘", "長者", "科技", "關懷", "支援", "24小時"],
-        districts: ["全港各區"],
-        seeMarkLevel: "創越級",
-        languages: ["粵語", "英語", "普通話"],
-        website: "https://www.schsa.org.hk",
-        phone: "2815 5555"
-    },
-    {
-        id: "SE-016",
-        name: "匡智社會企業部",
-        nameEn: "Hong Chi Social Enterprise",
-        year: 1970,
-        mission: "為智障學員提供多元化工作機會，建立自我價值及提昇競爭力",
-        targetGroup: "智障人士",
-        category: "餐飲服務",
-        serviceTags: ["智障人士"],
-        impactTags: ["傷健共融", "就業培訓", "青年發展"],
-        enterpriseTags: ["餐飲服務", "培訓工作坊"],
-        productsServices: ["匡智餐廳（Café）", "中央廚房（飯盒及到會）", "HC Café", "匡智廊及匡智庭"],
-        esgPlans: ["企業團體膳食服務", "智障人士就業計劃合作", "員工包容文化培訓"],
-        keywords: ["智障", "餐飲", "咖啡", "到會", "飯盒"],
-        districts: ["沙田", "灣仔", "香港仔"],
-        seeMarkLevel: "創進級",
-        languages: ["粵語"],
-        website: "https://hcseo.org.hk"
-    },
-    {
-        id: "SE-017",
-        name: "好主意餐飲服務",
-        nameEn: "Good Idea Catering Service",
-        year: 2004,
-        mission: "為公眾提供健康及優質之餐飲食品",
-        targetGroup: "公眾",
-        category: "餐飲服務",
-        serviceTags: [],
-        impactTags: ["社會創新"],
-        enterpriseTags: ["餐飲服務"],
-        productsServices: ["到會服務", "餐飲外賣", "節慶食品"],
-        esgPlans: ["企業活動餐飲服務", "節慶聚餐到會"],
-        keywords: ["到會", "餐飲", "外賣", "節慶"],
-        seeMarkLevel: "創建級",
-        languages: ["粵語"],
-        website: "https://www.goodideashk.com"
-    },
-    {
-        id: "SE-018",
-        name: "樂農",
-        nameEn: "Lo Hang",
-        year: 2011,
-        mission: "為聽障人士提供就業機會",
-        targetGroup: "聽障人士",
-        category: "餐飲服務",
-        serviceTags: ["聽障人士"],
-        impactTags: ["傷健共融", "就業培訓"],
-        enterpriseTags: ["餐飲服務"],
-        productsServices: ["素食餐廳", "到會服務"],
-        esgPlans: ["企業活動餐飲服務", "聽障就業支援"],
-        keywords: ["聽障", "素食", "餐飲", "到會"],
-        languages: ["粵語"]
-    },
-    {
-        id: "SE-019",
-        name: "銀杏館",
-        nameEn: "Gingko House",
-        year: 2003,
-        mission: "為長者提供就業機會，發揮銀髮生產力",
-        targetGroup: "長者",
-        category: "餐飲服務",
-        serviceTags: ["長者服務"],
-        impactTags: ["長者關懷", "就業培訓"],
-        enterpriseTags: ["餐飲服務"],
-        productsServices: ["餐廳服務", "送遞服務", "到會服務"],
-        esgPlans: ["企業聚餐活動", "長者就業支持"],
-        keywords: ["長者", "餐廳", "到會", "銀髮"],
-        districts: ["中環", "太子"],
-        seeMarkLevel: "創進級",
-        languages: ["粵語", "英語"],
-        website: "https://www.gingkohouse.hk"
-    },
-    {
-        id: "SE-020",
-        name: "新生精神康復會",
-        nameEn: "New Life Psychiatric Rehabilitation Association",
-        year: 1968,
-        mission: "為精神病康復者開創訓練及就業機會",
-        targetGroup: "精神病康復者",
-        category: "綜合服務",
-        serviceTags: ["精神健康"],
-        impactTags: ["精神康復", "就業培訓"],
-        enterpriseTags: ["零售", "培訓工作坊"],
-        productsServices: ["新生健康生活專門店", "新生農場有機蔬菜", "社企餐廳"],
-        esgPlans: ["員工心理健康培訓", "有機產品採購"],
-        keywords: ["精神健康", "康復", "有機", "蔬菜", "餐廳"],
-        districts: ["屯門", "尖沙咀", "大圍"],
-        seeMarkLevel: "創越級",
-        languages: ["粵語", "英語"],
-        website: "https://www.nlpra.org.hk"
-    },
-    {
-        id: "SE-025",
-        name: "黑暗中對話",
-        nameEn: "Dialogue in the Dark",
-        year: 2008,
-        mission: "促進社會共融，讓視障人士展現能力",
-        targetGroup: "視障人士、公眾",
-        category: "體驗教育",
-        serviceTags: ["視障人士"],
-        impactTags: ["傷健共融", "社會創新", "社區共融"],
-        enterpriseTags: ["培訓工作坊", "員工活動"],
-        productsServices: ["黑暗體驗工作坊", "企業培訓", "視障就業機會"],
-        esgPlans: ["企業包容文化培訓", "團隊建立活動", "視障就業支持"],
-        keywords: ["視障", "黑暗", "體驗", "培訓", "團隊", "共融"],
-        districts: ["美孚"],
-        seeMarkLevel: "創越級",
-        languages: ["粵語", "英語"],
-        website: "https://www.dialogue-in-the-dark.hk"
-    }
-];
+// IMPACT MATCH - 資料庫（從 Supabase 讀取）
+const SUPABASE_URL = 'https://silnlhygactdnmbffocc.supabase.co';
+const API_KEY = 'sb_publishable_cN0NUBNGOHZNLrAVuKr_Ww_ni7iG-AA';
 
-// 匯出
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = socialEnterprises;
+// 從 Supabase 獲取所有社企
+async function getSocialEnterprises() {
+    try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/social_enterprises?select=*&order=id.asc`, {
+            headers: {
+                'apikey': API_KEY,
+                'Authorization': `Bearer ${API_KEY}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        return await response.json();
+    } catch (error) {
+        console.error('獲取社企資料失敗:', error);
+        return [];
+    }
+}
+
+// 根據 ID 獲取單一社企
+async function getSocialEnterpriseById(id) {
+    try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/social_enterprises?id=eq.${id}&select=*`, {
+            headers: {
+                'apikey': API_KEY,
+                'Authorization': `Bearer ${API_KEY}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data.length > 0 ? data[0] : null;
+    } catch (error) {
+        console.error('獲取社企詳情失敗:', error);
+        return null;
+    }
+}
+
+// 搜索社企（本地過濾）
+async function searchSocialEnterprises(keyword, category) {
+    const enterprises = await getSocialEnterprises();
+    
+    return enterprises.filter(se => {
+        // 關鍵字匹配
+        const keywordMatch = !keyword || 
+            se.name.toLowerCase().includes(keyword.toLowerCase()) ||
+            (se.name_en && se.name_en.toLowerCase().includes(keyword.toLowerCase())) ||
+            se.mission.toLowerCase().includes(keyword.toLowerCase()) ||
+            se.category.toLowerCase().includes(keyword.toLowerCase()) ||
+            (se.service_tags && se.service_tags.some(tag => tag.toLowerCase().includes(keyword.toLowerCase()))) ||
+            (se.impact_tags && se.impact_tags.some(tag => tag.toLowerCase().includes(keyword.toLowerCase()))) ||
+            (se.products_services && se.products_services.some(ps => ps.toLowerCase().includes(keyword.toLowerCase())));
+        
+        // 類別匹配
+        const categoryMatch = !category || category === 'all' || se.category === category;
+        
+        return keywordMatch && categoryMatch;
+    });
+}
+
+// 提交企業需求到 Supabase
+async function submitRequest(requestData) {
+    try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/requests`, {
+            method: 'POST',
+            headers: {
+                'apikey': API_KEY,
+                'Authorization': `Bearer ${API_KEY}`,
+                'Content-Type': 'application/json',
+                'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(requestData)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        return { success: true };
+    } catch (error) {
+        console.error('提交需求失敗:', error);
+        return { success: false, error: error.message };
+    }
+}
+
+// 保存配對結果
+async function saveMatch(matchData) {
+    try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/matches`, {
+            method: 'POST',
+            headers: {
+                'apikey': API_KEY,
+                'Authorization': `Bearer ${API_KEY}`,
+                'Content-Type': 'application/json',
+                'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(matchData)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        return { success: true };
+    } catch (error) {
+        console.error('保存配對結果失敗:', error);
+        return { success: false, error: error.message };
+    }
+}
+
+// 測試連接
+async function testConnection() {
+    const data = await getSocialEnterprises();
+    console.log(`已連接 Supabase，共 ${data.length} 間社企`);
+    return data.length > 0;
 }
